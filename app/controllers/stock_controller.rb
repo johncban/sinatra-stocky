@@ -2,8 +2,8 @@ require 'pry'
 
 
 class StockController < ApplicationController
-    alpha_token = "Z500O2H4SDCQV62G"
-    iex_token = "Tpk_205eb019e75d4ee887c5fc488056d222"
+    alpha_token = ""
+    iex_token = ""
 
     get '/stocks' do
         if logged_in?
