@@ -76,7 +76,7 @@ class StockController < ApplicationController
         end
 
        
-        url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey=28a8355a5a5a4b25a5cb7983009aa602"
+        url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey="
         resp = Net::HTTP.get_response(URI.parse(url))
         @data = JSON.parse(resp.body)
 
