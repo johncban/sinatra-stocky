@@ -1,0 +1,6 @@
+<h3>Login</h3>
+<form action="/login" method="POST">
+<input name="username" placeholder="Username:" type="text" />
+<input name="password" placeholder="Password:" type="password" />
+<input type="submit"<% _slim_codeattributes1 = ("Log In"); if _slim_codeattributes1; if _slim_codeattributes1 == true %> value=""<% else %> value="<%= ::Temple::Utils.escape_html((_slim_codeattributes1)) %>"<% end; end %> />
+</form>

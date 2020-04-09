@@ -1,0 +1,183 @@
+<section id="cont">
+  <!-- Navigation Bar -Begin- -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <span class="text-success h3">STO</span><span class="text-primary h3">CKY</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <% if current_user.admin == true %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Show All Users</a>
+        </li>
+        <% end %>
+        <li class="nav-item">
+          <a class="nav-link" href="/stocks">See All Saved Stocks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#createPortfolioModal">Create Portfolio</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/stocks/new">Search Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link"> | </span>
+        </li>
+        <li class="nav-item active">
+          <span class="nav-link">EDIT STOCK ID: <%= @stock.id %> <span class="sr-only">(current)</span> </span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link"> | </span>
+        </li>
+      </ul>
+      <div class="navbar-text font-weight-bold">
+        Welcome, 
+        <a href="/users/<%= current_user.id %>"><%= current_user.username %></a>!
+      </div>
+    </div>
+  </nav>
+  <!-- Navigation Bar -End- -->
+</section>
+
+<section class="frost-wide">
+    <h1 class="text-success h5-m">
+      EDIT STOCK
+    </h1>
+</section>
+
+<section class="container-fluid frost-wide">
+  <!-- Grid row -->
+   <div class="row d-flex justify-content-center">
+
+   <!-- Grid column -->
+   <div class="col-md-10 col-xl-6 py-5">
+
+      <!--Accordion wrapper-->
+      <div class="accordion" id="accordionEx7" role="tablist"
+         aria-multiselectable="true">
+
+         <!-- Accordion card -->
+         <div class="card rounded-0">
+
+         <!-- Card header -->
+         <div class="card-header" role="tab" id="heading1">
+            <a data-toggle="collapse" data-parent="#accordionEx7" href="#collapse1" aria-expanded="true"
+               aria-controls="collapse1">
+               <h5>
+                  SCREEN SEARCH STOCK
+               </h5>
+            </a>
+         </div>
+
+         <!-- Card body -->
+         <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1"
+            data-parent="#accordionEx7">
+            <div class="card-body">
+               <!-- Stock Search to Update Stock |Begin|  -->
+               <form id="screen" action="/stocks/<%=@stock.id%>/edit" method="post" >
+                  <input id="POST-last" type="text" name="stock_search" placeholder="Screen Stock Symbol">
+                  
+                  <button type="submit" class="btn btn-success rounded-0" onclick="clearfield();">Stock Screen</button>
+                  <h4>
+                     <%= @comp_name %>
+                  </h4>
+               </form>
+               <!-- Stock Search to Update Stock |End|  -->
+            </div>
+         </div>
+         </div>
+         <!-- Accordion card -->
+
+         <!-- Accordion card -->
+         <div class="card rounded-0">
+
+         <!-- Card header -->
+         <div class="card-header" role="tab" id="heading2">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse2"
+               aria-expanded="false" aria-controls="collapse2">
+               <h5>
+                  EDIT STOCK
+               </h5>
+            </a>
+         </div>
+
+         <!-- Card body -->
+         <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2"
+            data-parent="#accordionEx7">
+            <div class="card-body">
+               <!-- Edit Stock Record |Begin|  -->
+               <form id="buyform" action="/stocks/<%= @stock.id%>" method="post" >
+                  <input id="hidden" type="hidden" name="_method" value="PATCH">
+                  <div class="form-group">
+                     <input type="text" name="stock" placeholder="Edit Stock Symbol <%= @quote_symbol %>" class="" id="stock_symbol" value="">
+                        <small>
+                           Current Stock Symbol
+                           <span class="badge badge-info rounded-0">
+                              <%= @stock.stock %>
+                           </span>
+                        </small>
+                  </div>
+                  <div class="form-group">
+                     Current Stock Name
+                     <span class="badge badge-info rounded-0">
+                        <%= @company_name %>
+                     </span>
+                  </div>
+                  <div class="form-group">
+                     <input id="qty"  type="text" name="quantity" placeholder="Edit QTY" oninput="calculate();"/>
+                     <small>
+                        Saved Quantity
+                        <span class="badge badge-info rounded-0">
+                           <%= @stock.quantity %>
+                        </span>
+                     </small>
+                  </div>
+                  <div class="form-group">
+                     <input id="prc" type="text" name="price" placeholder="Stock Price" class="" value="<%= @qp_price %>" oninput="calculate();" readonly/>
+                        <small>
+                           Current Saved Stock Price <span class="badge badge-info rounded-0"><%= @q_price %></span>
+                        </small>
+                  </div>
+                  <div class="form-group">
+                     <input type="text" name="total" placeholder="Total Cost" class="" id="total" value="" readonly/>
+                        <small>
+                           Current Saved Total Asset Cost <span class="badge badge-info rounded-0">$<%= @o_total %></span>
+                        </small>
+                  </div>
+                  <div class="form-group">
+                     <label  style="color: black; -webkit-font-smoothing: antialiased !important;" for="category">Category</label>
+                     <!-- https://medium.com/@35jadeh/putting-a-select-box-in-your-sinatra-application-without-using-ruby-c6e6568bf59b -->
+                     <select name="portfolioname">
+                        <% current_user.portfolios.each do |portfolio| %>
+                           <option  name="portfolioname"><%= portfolio.portfolioname %></option>
+                        <%end%>
+                     </select>
+                  </div>
+                  <button type="submit" class="btn btn-success rounded-0">Edit Portfolio</button>
+               </form>
+               <!-- Edit Stock Record |End|  -->
+            </div>
+         </div>
+         </div>
+         <!-- Accordion card -->
+      </div>
+      <!--/.Accordion wrapper-->
+
+   </div>
+   <!-- Grid column -->
+
+   </div>
+   <!-- Grid row -->
+</section>
+
+
+

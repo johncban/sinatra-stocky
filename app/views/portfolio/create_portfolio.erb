@@ -1,0 +1,64 @@
+<section id="cont">
+  <!-- Navigation Bar -Begin- -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <span class="text-success h3">STO</span><span class="text-primary h3">CKY</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <% if current_user.admin == true %>
+          <li class="nav-item">
+            <a class="nav-link" href="/users">Show All Users</a>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <a class="nav-link" href="/stocks">See All Saved Stocks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/portfolio">User Portfolio</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#createPortfolioModal">Create Portfolio<span class="sr-only">(current)</span></a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/stocks/new">Search Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+      <div class="navbar-text font-weight-bold">
+        Welcome, 
+        <a href="/users/<%= current_user.id %>"><%= current_user.username %></a>!
+      </div>
+    </div>
+  </nav>
+  <!-- Navigation Bar -End- -->
+</section>
+
+<section class="frost-wide">
+    <h1 class="text-success h5-m">
+      CREATE PORTFOLIO
+    </h1>
+</section>
+
+
+<div id="abs-center" class="frost">
+    <form action="/portfolio" method="POST">
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control rounded-0" name="portfolioname" type="text" placeholder="Create Portfolio Name"/>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" value="Save" class="btn btn-success rounded-0"/>
+      </div>
+    </form>
+</div>

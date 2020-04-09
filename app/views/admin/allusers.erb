@@ -1,0 +1,94 @@
+<section id="cont">
+  <!-- Navigation Bar -Begin- -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <span class="text-success h3">STO</span><span class="text-primary h3">CKY</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Show All Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signupuser">Register New User</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/stocks/new">Search Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+                <li class="nav-item">
+          <span class="nav-link"> | </span>
+        </li>
+        <li class="nav-item active">
+          <span class="nav-link">Welcome Admin - <%= current_user.username %> <span class="sr-only">(current)</span> </span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link"> | </span>
+        </li>
+      </ul>
+      <div class="navbar-text font-weight-bold">
+        <% if current_user.admin == true %>
+        <div class="navbar-text l-margin">
+            <a href="/signupuser" class="btn btn-outline-secondary rounded-0" role="button">Register a New User</a>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </nav>
+  <!-- Navigation Bar -End- -->
+</section>
+
+<section class="frost-wide">
+    <h1 class="text-success h5-m">
+        USER SUMMARY
+    </h1>
+</section>
+
+<table class="table frost">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" class="text-success">ID #</th>
+            <th scope="col" class="text-success">User Name</th>
+            <th scope="col" class="text-success">Email</th>
+            <th scope="col" class="text-success">Admin Privilleage</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% unless @user.empty?
+        @user.each do |users|
+    %>
+        <tr class ="text-white">
+            <th scope="row">
+                <a href="/users/<%= users.id %>">
+                    <%= users.id %>
+                </a>
+            </th>
+            <td>
+                <%= users.username %>
+            </td>
+            <td>
+                <%= users.email %>
+            </td>
+            <td>
+                <% if users.admin == true %> 
+                    <%= users.admin %>
+                <% else %>
+                    false
+                <% end %>
+            </td>
+        </tr>
+    <% end; else %>
+    <p> 
+     No users found. Please add some users. Thank you!
+    </p>
+    <% end %>
+    </tbody>
+</table>

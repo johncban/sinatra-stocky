@@ -1,0 +1,184 @@
+<section id="cont">
+  <!-- Navigation Bar -Begin- -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <span class="text-success h3">STO</span><span class="text-primary h3">CKY</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
+        </li>
+        <% if current_user.admin == true %>
+          <li class="nav-item">
+            <a class="nav-link" href="/users">Show All Users</a>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <a class="nav-link" href="/stocks">See All Saved Stocks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/portfolio">User Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#createPortfolioModal">Create Portfolio</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/stocks/new">Search Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+      <div class="navbar-text font-weight-bold">
+        Welcome, 
+        <a href="/users/<%= current_user.id %>"><%= current_user.username %></a>!
+      </div>
+    </div>
+  </nav>
+  <!-- Navigation Bar -End- -->
+</section>
+
+<section class="frost-wide">
+    <h1 class="text-success h5-m">
+      USER DASHBOARD
+    </h1>
+</section>
+
+  <div class="container-fluid frost-wide">
+    <div class="row">
+      
+      <div class="col-sm-6">
+        <div class="card rounded-0">
+          <div class="card-body">
+            <%= line_chart @relTime, discrete: true, refresh: 10, width: "100%", height: "500px", colors: ["#b00", "#666"], curve: false, bytes: true, title: "Real Time US Sector Performance" %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-6">
+        <div class="card rounded-0">
+          <div class="card-body">
+            <%= bar_chart @fiveDay, stacked: true, refresh: 10, width: "100%", height: "500px", bytes: true, title: "Five Day US Sector Performance" %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+<section id="cont">
+  <div class="container-fluid">
+    <table class="table frost-wide table-hover">
+    <thead class="text-white-50 thead-dark">
+      <tr>
+        <th scope="col">Portfolio ID</th>
+        <th scope="col">Portfolio Name</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+      <tbody>
+      <% current_user.portfolios.each do |portfolio| %>
+        <tr class="text-secondary">
+          <th scope="row">
+            <%= portfolio.id %> 
+          </th>
+          <td> 
+            <a href="/portfolio/<%= portfolio.id %>">
+              <%= portfolio.portfolioname %>
+            </a>
+          </td>
+          <td>
+            <a href="/portfolio/<%= portfolio.id %>/edit">
+            <button class="btn btn-warning material-icons btn-sm rounded-0">merge_type</button>
+            </a>
+          </td>
+          <td>
+            <form action="/portfolio/<%= portfolio.id %>/delete" method="POST">
+                <input type="hidden" id="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-danger material-icons btn-sm rounded-0">delete</button>
+            </form>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editProfileModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Profile</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <form action="/users/<%= @user.id %>" method="POST">
+      <div class="modal-body">
+        <input id="hidden" name="_method" type="hidden" value="PATCH" />
+        <div class="form-group">
+          <input class="form-control rounded-0" name="username" type="text" placeholder="Edit User Name"/>
+          <small class="form-text">
+            Current User Name: <%= @user.username %>
+          </small>
+        </div>
+        <div class="form-group">
+          <input class="form-control rounded-0" name="email" type="email" placeholder="Edit Email"/>
+          <small class="form-text">
+            Current User Email: <%= @user.email %>
+          </small>
+        </div>
+        <div class="form-group">
+          <input class="form-control rounded-0" name="password" placeholder="Enter password" type="password" placeholder="Enter or Change Password"/>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" value="Save" class="btn btn-outline-dark rounded-0" />
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Create Portfolio -->
+<div class="modal fade" id="createPortfolioModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Create Portfolio</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <form action="/portfolio" method="POST">
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control rounded-0" name="portfolioname" type="text" placeholder="Create Portfolio Name"/>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-0"/>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,173 @@
+<section id="cont">
+  <!-- Navigation Bar -Begin- -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <span class="text-success h3">STO</span><span class="text-primary h3">CKY</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <% if current_user.admin == true %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Show All Users</a>
+        </li>
+        <% end %>
+        <li class="nav-item">
+          <a class="nav-link" href="/stocks">See All Saved Stocks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#createPortfolioModal">Create Portfolio</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="/stocks/new">Search Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link"> | </span>
+        </li>
+        <li class="nav-item active">
+          <span class="nav-link">STOCK ID: <%= @stock.id %><span class="sr-only">(current)</span></span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link"> | </span>
+        </li>
+      </ul>
+      <div class="navbar-text font-weight-bold">
+        Welcome, 
+        <a href="/users/<%= current_user.id %>"><%= current_user.username %></a>!
+      </div>
+    </div>
+  </nav>
+  <!-- Navigation Bar -End- -->
+</section>
+
+
+<div class="container-fluid frost-wide">
+   <div class="row">
+      <div class="col-sm-6">
+         <div class="card rounded-0">
+            <div class="card-body">
+
+
+               <div class="row">
+                  
+                  <div class="col">
+                     <h1 class="card-title text-uppercase text-info">
+                        <%= @company_name %>
+                     </h1>
+                     <h1>
+                        <span class="badge badge-info">
+                        <%= @stock.stock.upcase %>
+                        </span>
+                     </h1>
+                     <h2>
+                        <%= @stock_type %>
+                     </h2>
+                  </div>
+
+                  <div class="col">
+                     <div class="row">
+                        <form action="/stocks/<%= @stock.id %>/delete" method="post">
+                           <input type="hidden" id="hidden" name="_method" value="DELETE">
+                           <button type="submit" class="btn btn-danger btn-lg rounded-0">Delete Stock</button>
+                        </form>
+                        <form action="/stocks/<%= @stock.id %>/edit">
+                          <button type="submit" class="btn btn-warning btn-lg rounded-0">Edit Stock</button>
+                        </form>
+                     </div>
+                     <div class="row">
+                       <h1>
+                           <%= "Portfolio: #{@stock.portfolio.portfolioname}" %>
+                        </h1>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <h3 class="stock_price border border-info rounded-0 bg-info text-white">
+                     <%= "Unit Own   #{@stock.quantity}" %>
+                  </h3>
+               </div>
+               <div class="row">
+                  <h3 class="stock_price border border-info rounded-0 bg-info text-white">
+                     <%= "Stock Price   $#{@q_price}" %>
+                  </h3>
+               </div>
+               <div class="row">
+                  <h2 class="stock_price border border-info rounded-0 bg-info text-dark">
+                     <%= @o_total %>
+                  </h2>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-sm-6">
+         <div class="card rounded-0">
+            <div class="card-body">
+           
+               <%= line_chart @stock_vol, discrete: true, refresh: 10, width: "100%", height: "500px", colors: ["#b00", "#666"], curve: false, bytes: true, title: "Stock Volume" %>
+      
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<div class="container-fluid frost-wide">
+   <div class="row">
+      <div class="col-sm-6">
+         <div class="card rounded-0">
+            <div class="card-body">
+   
+               <%= line_chart @stock_high, discrete: true, refresh: 10, width: "100%", height: "500px", colors: ["#b00", "#666"], curve: false, bytes: true, title: "All Time High" %>
+      
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-6">
+         <div class="card rounded-0">
+            <div class="card-body">
+          
+               <%= line_chart @stock_low, discrete: true, refresh: 10, width: "100%", height: "500px", colors: ["#b00", "#666"], curve: false, bytes: true, title: "All Time Low" %>
+         
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<!-- Modal Create Portfolio -->
+<div class="modal fade" id="createPortfolioModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Create Portfolio</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <form action="/portfolio" method="POST">
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control rounded-0" name="portfolioname" type="text" placeholder="Create Portfolio Name"/>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-0"/>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

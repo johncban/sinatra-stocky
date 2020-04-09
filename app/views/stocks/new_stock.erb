@@ -1,0 +1,264 @@
+<section id="cont">
+  <!-- Navigation Bar -Begin- -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      <span class="text-success h3">STO</span><span class="text-primary h3">CKY</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <% if current_user.admin == true %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Show All Users</a>
+        </li>
+        <% end %>
+        <% if current_user.admin == true %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Show All Users</a>
+        </li>
+        <% end %>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#createPortfolioModal">Create Portfolio</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/stocks/new">Search Stock<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+      </ul>
+      <% if current_user.admin == true %>
+        <div class="navbar-text l-margin">
+              <form action="" method="post">
+                  <input type="hidden" id="hidden" name="_method" value="DELETE">
+                  <button type="submit" class="btn btn-outline-danger rounded-0">Delete <%= current_user.username %> Profile </button>
+              </form>
+        </div>
+      <% end %>
+    </div>
+  </nav>
+  <!-- Navigation Bar -End- -->
+</section>
+
+
+<section class="frost-wide">
+    <h1 class="text-success h5-m">
+      STOCK RESEARCH
+    </h1>
+</section>
+
+
+<section class="container-fluid frost-wide">
+  <!-- Grid row -->
+   <div class="row d-flex justify-content-center">
+
+   <!-- Grid column -->
+   <div class="col-md-10 col-xl-6 py-5">
+
+      <!--Accordion wrapper-->
+      <div class="accordion" id="accordionEx7" role="tablist"
+         aria-multiselectable="true">
+
+         <!-- Accordion card -->
+         <div class="card rounded-0">
+
+         <!-- Card header -->
+         <div class="card-header" role="tab" id="heading1">
+            <a data-toggle="collapse" data-parent="#accordionEx7" href="#collapse1" aria-expanded="true"
+               aria-controls="collapse1">
+               <h5>
+                  STOCK SCREENING
+               </h5>
+            </a>
+         </div>
+
+         <!-- Card body -->
+         <div id="collapse1" class="collapse show" role="tabpanel" aria-labelledby="heading1"
+            data-parent="#accordionEx7">
+            <div class="card-body">
+               <!-- Stock Search |Begin|  -->
+                <form id="screen" action="/stocks/new" method="post" >
+                  <label for="POST-last">Search Stock: </label>
+                  <input id="POST-last" type="text" name="stock_search" class="text-uppercase">
+                  <button type="submit" class="btn btn-success rounded-0" onclick="clearfield();">Stock Screen</button>
+                    <div>
+                      <h3 id="stock_company">
+                        <%= @company_name %>
+                      </h3>
+                    </div>
+                </form>
+               <!-- Stock Search |End|  -->
+            </div>
+         </div>
+         </div>
+         <!-- Accordion card -->
+
+         <!-- Accordion card -->
+         <div class="card rounded-0">
+
+         <!-- Card header -->
+         <div class="card-header" role="tab" id="heading2">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse2"
+               aria-expanded="false" aria-controls="collapse2">
+               <h5>
+                  STOCK INFORMATION AND FORECASTS
+               </h5>
+            </a>
+         </div>
+
+         <!-- Card body -->
+         <div id="collapse2" class="collapse" role="tabpanel" aria-labelledby="heading2"
+            data-parent="#accordionEx7">
+            <div class="card-body">
+               <!-- Stock Information |Begin|  -->
+                <% if @company_name == nil %>
+                  <p>
+                    Please Search a Stock.
+                  </p>
+                <% else %>
+                  <h1><%= @company_name %></h1>
+                  <hr>
+                  <h3>
+                    <span class="badge badge-info rounded-0">
+                      <%= @quote_price %>
+                    </span>
+                  </h3>
+                  <h5>
+                    <span class="badge badge-success rounded-0">
+                      <%= @high %>
+                    </span>
+                    |
+                    <span class="badge badge-danger rounded-0">
+                      <%= @low %>
+                    </span>
+                  </h5>
+                  <h5>
+                    <span class="badge badge-secondary rounded-0"><%= @five_change %></span>
+                  </h5>
+                  <h6>
+                    <span class="badge badge-dark rounded-0"><%= @sv10 %></span> 
+                    | 
+                    <span class="badge badge-dark rounded-0"><%= @sv30 %></span>
+                    |
+                    <span class="badge badge-warning rounded-0"><%= @eps %></span>
+                  </h6>
+                  <hr>
+                    <% @data["articles"].each do |articles| %>
+                    <ul>
+                      <li>
+                        <!-- https://www.thesitewizard.com/html-tutorial/open-links-in-new-window-or-tab.shtml -->
+                        <b>
+                          <a href="<%= articles['url'] %>" target="_blank" rel="noopener noreferrer">
+                            <%= articles['title'] %>
+                          </a>
+                        </b>
+                        <blockquote class="blockquote">
+                          <span class="mb-0">
+                            <%= articles['description'] %>
+                          </span>
+                        </blockquote>
+                      </li>
+                    </ul>
+                    <% end %>
+                <% end %>
+               <!-- Stock Information |End|  -->
+            </div>
+         </div>
+        </div>
+        <!-- Accordion card -->
+
+        <!-- Accordion card -->
+        <div class="card rounded-0">
+
+          <!-- Card header -->
+          <div class="card-header rgba-stylish-strong z-depth-1 mb-1" role="tab" id="heading3">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx7" href="#collapse3"
+              aria-expanded="false" aria-controls="collapse3">
+              <h5 class="mb-0 white-text text-uppercase font-thin">
+              SAVE STOCK 
+              </h5>
+            </a>
+          </div>
+
+          <!-- Card body -->
+          <div id="collapse3" class="collapse" role="tabpanel" aria-labelledby="heading3" data-parent="#accordionEx7">
+            <div class="card-body">
+              <form id="buyform" action="/stocks" method="post" >
+                <div class="form-group">
+                  <input type="text" name="stock" placeholder="Stock Symbol" class="text-uppercase" id="stock_symbol" value="<%= @quote_symbol %>"/>
+                  <small class="form-text text-muted">
+                    <%= @company_name %>
+                  </small>
+                </div>
+                <div class="form-group">
+                  <input id="qty"  type="text" name="quantity" placeholder="Number of Stock to Buy" class="" oninput="calculate();"/>
+                </div>
+                <div class="form-group">
+                  <input id="prc" type="text" name="price" placeholder="Stock Price" class="" value="<%= @symbol_price %>" oninput="calculate();"/>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="total" placeholder="Total Cost" class="" id="total" disabled/>
+                </div>              
+                <div class="form-group">
+                  <label  style="color: black; -webkit-font-smoothing: antialiased !important;" for="category">Category</label>
+                  <!-- https://medium.com/@35jadeh/putting-a-select-box-in-your-sinatra-application-without-using-ruby-c6e6568bf59b -->
+                  <select name="portfolioname">
+                    <% current_user.portfolios.each do |portfolio| %>
+                      <option  name="portfolioname"><%= portfolio.portfolioname %></option>
+                    <%end%>
+                  </select>
+                </div>
+              <button type="submit" class="btn btn-success rounded-0">Save</button>
+            </form> 
+            </div>
+          </div>
+        </div>
+        <!-- Accordion card -->
+
+      </div>
+      <!--/.Accordion wrapper-->
+
+   </div>
+   <!-- Grid column -->
+
+   </div>
+   <!-- Grid row -->
+
+
+
+</section>
+
+
+
+
+
+
+<!-- Modal Create Portfolio -->
+<div class="modal fade" id="createPortfolioModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-0">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Create Portfolio</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <form action="/portfolio" method="POST">
+      <div class="modal-body">
+        <div class="form-group">
+          <input class="form-control rounded-0" name="portfolioname" type="text" placeholder="Create Portfolio Name"/>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-0"/>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
