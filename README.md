@@ -4,7 +4,7 @@
 
 
 # sinatra-stocky
-<hr>
+
 Second Flatiron Project, a Sinatra portfolio project that creates user account, collects stock symbols and its data.
 Capable to CRUD or Create Update Delete the user, portfolio and stocks.
 
