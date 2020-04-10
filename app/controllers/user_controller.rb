@@ -15,7 +15,7 @@ class UserController < ApplicationController
         if params[:username].empty?
 			flash[:regnoname] = "Enter Signup Name - Error Code #{response.status}"
             redirect '/'
-        elsif params[:email].empty? || EmailValidator.invalid?([:email])
+        elsif params[:email].empty?
 			flash[:regnoemail] = "Enter Proper Signup Email - Error Code #{response.status}"
 			redirect '/'
         elsif params[:password].empty?
