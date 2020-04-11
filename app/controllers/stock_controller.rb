@@ -2,8 +2,8 @@ require 'pry'
 
 
 class StockController < ApplicationController
-    alpha_token = ""
-    iex_token = ""
+    alpha_token = "Z500O2H4SDCQV62G"
+    iex_token = "Tpk_205eb019e75d4ee887c5fc488056d222"
 
     get '/stocks' do
         if logged_in?
@@ -24,8 +24,8 @@ class StockController < ApplicationController
 
 
     post '/stocks' do
-        if params[:stock].empty? || params[:quantity].empty? || params[:portfolioname].empty?
-                flash[:stocksform_error] = "Please don't leave blank content - Error Code: #{response.status}"
+        if params[:stock].empty? || params[:quantity].empty? || params[:portfolioname] == nil
+                flash[:stocksform_error] = "Please don't leave all text box blank - Error Code: #{response.status}"
                 redirect to "/stocks/new"
         else
                 @user = current_user
@@ -42,13 +42,14 @@ class StockController < ApplicationController
     post '/stocks/new' do
         # IEX - Stock Screening -- begin
         qt = params[:stock_search].to_s
+        pn = params[:portfolioname]
         client = IEX::Api::Client.new(
                 publishable_token: iex_token,
                 endpoint: 'https://sandbox.iexapis.com/v1'
         )
         
-        if qt == ""
-                flash[:qt_empty] = "Please Enter Stock Symbol."
+        if qt == "" || pn == ""
+                flash[:qt_empty] = "Please Enter Stock Symbol or Portfolio."
         else 
                 quote = client.quote(qt)
 
@@ -76,7 +77,7 @@ class StockController < ApplicationController
         end
 
        
-        url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey="
+        url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey=28a8355a5a5a4b25a5cb7983009aa602"
         resp = Net::HTTP.get_response(URI.parse(url))
         @data = JSON.parse(resp.body)
 
