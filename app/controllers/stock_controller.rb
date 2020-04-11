@@ -24,7 +24,7 @@ class StockController < ApplicationController
 
 
     post '/stocks' do
-        if params[:stock].empty? || params[:quantity].empty? || params[:portfolioname].empty?
+        if params[:stock].empty? || params[:quantity].empty? || params[:portfolioname] == ""
                 flash[:stocksform_error] = "Please don't leave blank content - Error Code: #{response.status}"
                 redirect to "/stocks/new"
         else
