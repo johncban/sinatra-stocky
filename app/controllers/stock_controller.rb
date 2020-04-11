@@ -24,8 +24,8 @@ class StockController < ApplicationController
 
 
     post '/stocks' do
-        if params[:stock].empty? || params[:quantity].empty? || params[:portfolioname] == ""
-                flash[:stocksform_error] = "Please don't leave blank content - Error Code: #{response.status}"
+        if params[:stock].empty? || params[:quantity].empty? || params[:portfolioname] == nil
+                flash[:stocksform_error] = "Please don't leave all text box blank - Error Code: #{response.status}"
                 redirect to "/stocks/new"
         else
                 @user = current_user
@@ -42,13 +42,14 @@ class StockController < ApplicationController
     post '/stocks/new' do
         # IEX - Stock Screening -- begin
         qt = params[:stock_search].to_s
+        pn = params[:portfolioname]
         client = IEX::Api::Client.new(
                 publishable_token: iex_token,
                 endpoint: 'https://sandbox.iexapis.com/v1'
         )
         
-        if qt == ""
-                flash[:qt_empty] = "Please Enter Stock Symbol."
+        if qt == "" || pn == ""
+                flash[:qt_empty] = "Please Enter Stock Symbol or Portfolio."
         else 
                 quote = client.quote(qt)
 
