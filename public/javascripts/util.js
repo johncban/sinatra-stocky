@@ -11,13 +11,4 @@ function clearfield() {
   document.getElementById('prc').value = "";
 }
 
-function yesnoCheck(that) {
-  if (that.value == "new category") {
-      document.getElementById("ifYes").style.display = "block";
-      document.getElementById("create category").name = "category_name";
-  } else {
-      document.getElementById("ifYes").style.display = "none";
-      document.getElementById("create category").name = "no_name";
-  }
-}
 
