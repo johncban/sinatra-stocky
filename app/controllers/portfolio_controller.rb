@@ -109,8 +109,4 @@ class PortfolioController < ApplicationController
       end
     end
 
-    get '/portfolio/stocks/:id/edit' do
-      p response.status
-    end
-
 end
