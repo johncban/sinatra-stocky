@@ -50,7 +50,6 @@ stocky
 │       │   ├── stock.erb
 │       │   ├── stock_edit.erb
 │       │   └── user_stock_info.erb
-│       ├── user_portfolio.erb
 │       └── users
 │           ├── edit.erb
 │           ├── login.erb
@@ -96,25 +95,17 @@ stocky
 │   └── top-level-namespace.html
 ├── lib
 ├── public
-│   ├── favicon.ico
 │   ├── images
 │   │   ├── corneal-small.png
 │   │   ├── favicon.ico
-│   │   ├── minimal_abstract1.png
-│   │   ├── minimal_abstract2.png
-│   │   ├── ny.jpg
-│   │   ├── ny.png
 │   │   ├── stocky_logo.jpg
 │   │   └── stocky_logo.png
 │   ├── javascripts
 │   │   ├── Chart.bundle.js
 │   │   ├── chartkick.js
-│   │   ├── util.js
-│   │   └── vanta.waves.js
+│   │   └── util.js
 │   └── stylesheets
 │       └── main.css
-├── slim2erb
-│   └── README.md
 ├── spec
 │   ├── application_controller_spec.rb
 │   └── spec_helper.rb
