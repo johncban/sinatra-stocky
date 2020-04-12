@@ -8,7 +8,7 @@
 Second Flatiron Project, a Sinatra portfolio project that creates user account, collects stock symbols and its data.
 Capable of CRUD or Create Update Delete the user, portfolio and stocks.
 
-## Top Project Api Used
+## Top Project API
 
 [<img align="left" width="500" height="300" src="https://apifriends.com/wp-content/uploads/2018/02/alpha-vantage-home.png">](https://www.alphavantage.co/)
 
