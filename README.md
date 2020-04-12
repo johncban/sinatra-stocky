@@ -118,83 +118,104 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-In your PC or MAC, it will require [Ruby](https://www.ruby-lang.org/en/news/2020/03/31/ruby-2-6-6-released/) to be installed (i.e. Ruby 2.6.6).
+In your PC or MAC, it require [Ruby](https://www.ruby-lang.org/en/news/2020/03/31/ruby-2-6-6-released/) to be installed (i.e. Ruby 2.6.6).
 
-#### Installation
+#### Installing Ruby on PC
+To install Ruby on PC, follow this [video instructions](https://www.youtube.com/watch?v=OzijLscV3BQ).
+Here's the [Ruby Installer](https://rubyinstaller.org/) for Windows 10.
 
 
-```
-Give examples
-```
+#### Installing Ruby on Mac or Linux
+Installing ruby on Mac or Linux is quite easy than PC and here are the following YouTube steps:
 
-### Installing
+1. [Mac or OSX](https://www.youtube.com/watch?v=IXyPLDJDxcM)
+2. [Linux or Ubuntu](https://www.youtube.com/watch?v=Fm5wz74JKmo)
 
-A step by step series of examples that tell you how to get a development env running
+#### Git clone the repo
+I recommend using git instead of gem as this app or project is not yet publish for gem use.
 
-Say what the step will be
+To clone this repo, just click Clone or Download this repo as Zip; otherwise if you're system have a git app installed ([Windows Steps](https://help.github.com/en/desktop/getting-started-with-github-desktop/installing-github-desktop) - [OSX Steps](https://help.github.com/en/desktop/getting-started-with-github-desktop/installing-github-desktop)) do the following in your terminal or command line:
 
-```
-Give the example
-```
+```$ git clone https://github.com/johncban/sinatra-stocky.git```
 
-And repeat
+In the terminal or command prompt, change the current directory to sinatra-stocky folder.
 
-```
-until finished
-```
+And then execute the following command in the repo root folder to install the necessary gems:
 
-End with an example of getting some data out of the system or using it for a little demo
+    $ bundle
 
-## Running the tests
+#### API Registration for Token
+In order to run the project properly, it will require you to register to the following API providers for free API token.
+1.  [AlphaVantage API Key Registration.](https://www.alphavantage.co/support/#api-key)
+2. In [IEX Cloud](https://iexcloud.io/cloud-login#/register), select the account type as Individual for free account.
 
-Explain how to run the automated tests for this system
 
-### Break down into end to end tests
+## Running the Project
+After obtaining the API keys and Tokens, it will require to enter the API and token keys to the following controllers.
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+### StockController
+Inside the StockController or ```stock_controller.rb```, enter the Alpha Vantage token in line 5 then enter the IEX Cloud token to line 6.
 
 ```
-Give an example
+class StockController < ApplicationController
+    alpha_token = "TOKEN HERE"
+    iex_token = "TOKEN HERE"
+    ...
 ```
 
-## Deployment
+In line 80 inside StockController, it requires IEX API Key in the following code block.
 
-Add additional notes about how to deploy this on a live system
+```
+url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey=API TOKEN HERE"
+        resp = Net::HTTP.get_response(URI.parse(url))
+        @data = JSON.parse(resp.body)
+```
+
+### UserController
+Inside UserController or ```user_controller.rb```, enter the AlphaVantage token in line 6.
+
+```
+require 'pry'
+
+
+class UserController < ApplicationController
+
+	token = "TOKEN HERE"
+    ...
+```
+
+### The Shotgun Server
+The project's server is Shotgun, the said server is Ruby Rack-based that atomate code reloading of sinatra-stocky and make the app's test faster.
+
+After applying the API keys type ```shotgun``` then press enter, then copy and paste the server address to the web browser.
+```
+== Shotgun/WEBrick on http://127.0.0.1:9393/
+[2020-04-12 04:30:46] INFO  WEBrick 1.4.2
+[2020-04-12 04:30:46] INFO  ruby 2.6.5 (2019-10-01) [x86_64-linux]
+[2020-04-12 04:30:46] INFO  WEBrick::HTTPServer#start: pid=2343 port=9393
+```
+
+
 
 ## Built With
+1. [sinatra](https://rubygems.org/gems/sinatra)
+2. [yard-ghpages](https://rubygems.org/gems/yard-ghpages)
+3. [sqlite3](https://rubygems.org/gems/sqlite3)
+4. [sinatra-flash](https://rubygems.org/gems/sinatra-flash)
+5. [alphavantagerb](https://rubygems.org/gems/alphavantagerb)
+6. [iex-ruby-client](https://rubygems.org/gems/iex-ruby-client)
+7. [bcrypt](https://rubygems.org/gems/bcrypt)
+8. [email_validator](https://rubygems.org/gems/email_validator)
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sinatra-stocky. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-## Acknowledgments
+## Code of Conduct
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Everyone interacting in the Newsjournal project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/newsjournal/blob/master/CODE_OF_CONDUCT.md).
