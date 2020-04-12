@@ -3,7 +3,7 @@ require 'pry'
 
 class UserController < ApplicationController
 
-	token = "Z500O2H4SDCQV62G"
+	token = ""
 
 	
 	get "/signup" do
