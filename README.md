@@ -127,7 +127,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+In your PC or MAC, it will require [Ruby](https://www.ruby-lang.org/en/news/2020/03/31/ruby-2-6-6-released/) to be installed (i.e. Ruby 2.6.6).
+
+#### Installation
+
 
 ```
 Give examples
