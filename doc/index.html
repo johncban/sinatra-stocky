@@ -58,15 +58,235 @@
       </div>
 
       <div id="content"><div id='filecontents'>
-<h1 id="label-sinatra-stocky">sinatra-stocky</h1>
+<p>&lt;img align=“right” width=“100” height=“100” src=“<img src="https://raw.githubusercontent.com/johncban/sinatra-stocky/master/public/images/stocky_logo.png" />”&gt;</p>
 
-<p>Second Flatiron Project, a Sinatra portfolio project that creates user account, collects stock symbols and its data.</p>
+<p>&lt;img align=“right” width=“100” height=“100” src=“<img src="http://sinatrarb.com/images/logo.png" />”&gt;</p>
+
+<h1 id="label-Sinatra-stocky">Sinatra-stocky</h1>
+
+<p>Second Flatiron Project, a Sinatra portfolio project that creates user account, collects stock symbols and its data. Capable of CRUD or Create Update Delete the user, portfolio and stocks.</p>
+
+<h2 id="label-Top+Project+API">Top Project API</h2>
+
+<p><a href="https://www.alphavantage.co/"><img align="left" width="500" height="300" src="https://apifriends.com/wp-content/uploads/2018/02/alpha-vantage-home.png"></a></p>
+
+<p><a href="https://iexcloud.io/"><img width="500" height="300" src="https://mms.businesswire.com/media/20190522005193/en/723157/23/logo-color.jpg"></a></p>
+
+<h3 id="label-Directory+Tree">Directory Tree</h3>
+
+<pre class="code ruby"><code class="ruby">stocky
+.
+├── Gemfile
+├── Gemfile.lock
+├── README.md
+├── Rakefile
+├── app
+│   ├── controllers
+│   │   ├── application_controller.rb
+│   │   ├── portfolio_controller.rb
+│   │   ├── stock_controller.rb
+│   │   └── user_controller.rb
+│   ├── models
+│   │   ├── portfolio.rb
+│   │   ├── stock.rb
+│   │   ├── stocks.rb
+│   │   └── user.rb
+│   └── views
+│       ├── admin
+│       │   └── allusers.erb
+│       ├── failure.erb
+│       ├── home.erb
+│       ├── index.erb
+│       ├── layout.erb
+│       ├── portfolio
+│       │   ├── create_portfolio.erb
+│       │   ├── edit_portfolio.erb
+│       │   ├── show_portfolio.erb
+│       │   └── user_portfolio.erb
+│       ├── stocks
+│       │   ├── new_stock.erb
+│       │   ├── stock.erb
+│       │   ├── stock_edit.erb
+│       │   └── user_stock_info.erb
+│       └── users
+│           ├── edit.erb
+│           ├── login.erb
+│           ├── profile.erb
+│           └── signup.erb
+├── config
+│   ├── environment.rb
+│   └── initializers
+├── config.ru
+├── db
+│   ├── development.sqlite
+│   ├── migrate
+│   │   ├── 20191223030736_create_users.rb
+│   │   ├── 20200103093559_create_portfolio.rb
+│   │   └── 20200103093820_create_stocks.rb
+│   ├── schema.rb
+│   └── test.sqlite
+├── doc
+│   ├── ApplicationController.html
+│   ├── Portfolio.html
+│   ├── PortfolioController.html
+│   ├── Stock.html
+│   ├── StockController.html
+│   ├── Stocks.html
+│   ├── User.html
+│   ├── UserController.html
+│   ├── _index.html
+│   ├── class_list.html
+│   ├── css
+│   │   ├── common.css
+│   │   ├── full_list.css
+│   │   └── style.css
+│   ├── debug.log
+│   ├── file.README.html
+│   ├── file_list.html
+│   ├── frames.html
+│   ├── index.html
+│   ├── js
+│   │   ├── app.js
+│   │   ├── full_list.js
+│   │   └── jquery.js
+│   ├── method_list.html
+│   └── top-level-namespace.html
+├── lib
+├── public
+│   ├── images
+│   │   ├── corneal-small.png
+│   │   ├── favicon.ico
+│   │   ├── stocky_logo.jpg
+│   │   └── stocky_logo.png
+│   ├── javascripts
+│   │   ├── Chart.bundle.js
+│   │   ├── chartkick.js
+│   │   └── util.js
+│   └── stylesheets
+│       └── main.css
+├── spec
+│   ├── application_controller_spec.rb
+│   └── spec_helper.rb
+└── spec.md
+</code></pre>
+
+<h2 id="label-Getting+Started">Getting Started</h2>
+
+<p>These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.</p>
+
+<h3 id="label-Prerequisites">Prerequisites</h3>
+
+<p>In your PC or MAC, it require <a href="https://www.ruby-lang.org/en/news/2020/03/31/ruby-2-6-6-released/">Ruby</a> to be installed (i.e. Ruby 2.6.6).</p>
+
+<h4 id="label-Installing+Ruby+on+PC">Installing Ruby on PC</h4>
+
+<p>To install Ruby on PC, follow this <a href="https://www.youtube.com/watch?v=OzijLscV3BQ">video instructions</a>. Here&#39;s the <a href="https://rubyinstaller.org/">Ruby Installer</a> for Windows 10.</p>
+
+<h4 id="label-Installing+Ruby+on+Mac+or+Linux">Installing Ruby on Mac or Linux</h4>
+
+<p>Installing ruby on Mac or Linux is quite easy than PC and here are the following YouTube steps:</p>
+<ol><li>
+<p><a href="https://www.youtube.com/watch?v=IXyPLDJDxcM">Mac or OSX</a></p>
+</li><li>
+<p><a href="https://www.youtube.com/watch?v=Fm5wz74JKmo">Linux or Ubuntu</a></p>
+</li></ol>
+
+<h4 id="label-Git+clone+the+repo">Git clone the repo</h4>
+
+<p>I recommend using git instead of gem as this app or project is not yet publish for gem use.</p>
+
+<p>To clone this repo, just click Clone or Download this repo as Zip; otherwise if you&#39;re system have a git app installed (<a href="https://help.github.com/en/desktop/getting-started-with-github-desktop/installing-github-desktop">Windows Steps</a> - <a href="https://help.github.com/en/desktop/getting-started-with-github-desktop/installing-github-desktop">OSX Steps</a>) do the following in your terminal or command line:</p>
+
+<pre class="code ruby"><code class="ruby">git clone https://github.com/johncban/sinatra-stocky.git
+</code></pre>
+
+<p>In the terminal or command prompt, change the current directory to sinatra-stocky folder.</p>
+
+<p>And then execute the following command in the repo root folder to install the necessary gems:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle
+</code></pre>
+
+<h4 id="label-API+Registration+for+Token">API Registration for Token</h4>
+
+<p>In order to run the project properly, it will require you to register to the following API providers for free API token. 1. <a href="https://www.alphavantage.co/support/#api-key">AlphaVantage API Key Registration.</a> 2. In <a href="https://iexcloud.io/cloud-login#/register">IEX Cloud</a>, select the account type as Individual for free account.</p>
+
+<h2 id="label-Running+the+Project">Running the Project</h2>
+
+<p>After obtaining the API keys and Tokens, it will require to enter the API and token keys to the following controllers.</p>
+
+<h3 id="label-StockController">StockController</h3>
+
+<p>Inside the StockController or <code>stock_controller.rb</code>, enter the Alpha Vantage token in line 5 then enter the IEX Cloud token to line 6.</p>
+
+<pre class="code ruby"><code class="ruby">class StockController &lt; ApplicationController
+    alpha_token = &quot;TOKEN HERE&quot;
+    iex_token = &quot;TOKEN HERE&quot;
+    ...
+</code></pre>
+
+<p>In line 80 inside StockController, it requires IEX API Key in the following code block.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_url'>url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://newsapi.org/v2/everything?q=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@company_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>&amp;apiKey=API TOKEN HERE</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id identifier rubyid_resp'>resp</span> <span class='op'>=</span> <span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_get_response'>get_response</span><span class='lparen'>(</span><span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='ivar'>@data</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_resp'>resp</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+</code></pre>
+
+<h3 id="label-UserController">UserController</h3>
+
+<p>Inside UserController or <code>user_controller.rb</code>, enter the AlphaVantage token in line 6.</p>
+
+<pre class="code ruby"><code class="ruby">require &#39;pry&#39;
+
+
+class UserController &lt; ApplicationController
+
+	token = &quot;TOKEN HERE&quot;
+    ...
+</code></pre>
+
+<h3 id="label-The+Shotgun+Server">The Shotgun Server</h3>
+
+<p>The project&#39;s server is Shotgun, the said server is Ruby Rack-based that atomate code reloading of sinatra-stocky and make the app&#39;s test faster.</p>
+
+<p>After applying the API keys type <code>shotgun</code> then press enter, then copy and paste the server address to the web browser. <code> == Shotgun/WEBrick on http://127.0.0.1:9393/ [2020-04-12 04:30:46] INFO  WEBrick 1.4.2 [2020-04-12 04:30:46] INFO  ruby 2.6.5 (2019-10-01) [x86_64-linux] [2020-04-12 04:30:46] INFO  WEBrick::HTTPServer#start: pid=2343 port=9393 </code></p>
+
+<h2 id="label-Built+With">Built With</h2>
+<ol><li>
+<p><a href="https://rubygems.org/gems/sinatra">sinatra</a></p>
+</li><li>
+<p><a href="https://rubygems.org/gems/yard-ghpages">yard-ghpages</a></p>
+</li><li>
+<p><a href="https://rubygems.org/gems/sqlite3">sqlite3</a></p>
+</li><li>
+<p><a href="https://rubygems.org/gems/sinatra-flash">sinatra-flash</a></p>
+</li><li>
+<p><a href="https://rubygems.org/gems/alphavantagerb">alphavantagerb</a></p>
+</li><li>
+<p><a href="https://rubygems.org/gems/iex-ruby-client">iex-ruby-client</a></p>
+</li><li>
+<p><a href="https://rubygems.org/gems/bcrypt">bcrypt</a></p>
+</li><li>
+<p><a href="https://rubygems.org/gems/email_validator">email_validator</a></p>
+</li></ol>
+
+<h2 id="label-Contributing">Contributing</h2>
+
+<p>Bug reports and pull requests are welcome on GitHub at <a href="https://github.com/[USERNAME]/sinatra-stocky">github.com/[USERNAME]/sinatra-stocky</a>. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the <a href="http://contributor-covenant.org">Contributor Covenant</a> code of conduct.</p>
+
+<h2 id="label-License">License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
+
+<h2 id="label-Code+of+Conduct">Code of Conduct</h2>
+
+<p>Everyone interacting in the Newsjournal project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the of conduct[https://github.com/[USERNAME]/newsjournal/blob/master/CODE_OF_CONDUCT.md].</p>
 </div></div>
 
       <div id="footer">
-  Generated on Fri Apr 10 00:49:52 2020 by
+  Generated on Sun Apr 12 23:15:34 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.24 (ruby-2.6.3).
+  0.9.24 (ruby-2.6.5).
 </div>
 
     </div>
