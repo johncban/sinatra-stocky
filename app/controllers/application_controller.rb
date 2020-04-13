@@ -34,7 +34,6 @@ class ApplicationController < Sinatra::Base
 		
 		# Redirects the user to home page.
 		def portfolio_redirect
-			flash[:no_rights] = "The Current User is Not Allowed to Manipulate Other User's Data - Error Code: #{response.status}"
 			redirect to '/home'
 		end
 
