@@ -31,7 +31,6 @@ stocky
 │   ├── models
 │   │   ├── portfolio.rb
 │   │   ├── stock.rb
-│   │   ├── stocks.rb
 │   │   └── user.rb
 │   └── views
 │       ├── admin
