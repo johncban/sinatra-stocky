@@ -24,11 +24,12 @@ class PortfolioController < ApplicationController
     post '/portfolio' do
         if params[:portfolioname].empty?
             flash[:message] = "Please Enter the Portfolio Name - Error Code: #{response.status}"
-            portfolio_redirect
+            redirect to "/home"
         else
             @user = current_user
             @portfolio = Portfolio.create(portfolioname:params[:portfolioname], user_id:@user.id)
-            portfolio_redirect
+            flash[:message_portfolio] = "Portfolio Successfully Created - Response Code: #{response.status}"
+            redirect to "/home"
         end
     end
 
@@ -39,6 +40,7 @@ class PortfolioController < ApplicationController
       else
           @user = current_user
           @portfolio = Portfolio.create(portfolioname:params[:portfolioname], user_id:@user.id)
+          flash[:message_portfolio] = "Portfolio Successfully Created - Response Code: #{response.status}"
           redirect to "/home"
       end
     end
@@ -83,7 +85,7 @@ class PortfolioController < ApplicationController
           @portfolio = Portfolio.find(params[:id])
           @portfolio.update(portfolioname:params[:portfolioname])
           flash[:message] = "Your category has been updated successfully - Response Code: #{response.status}"
-          portfolio_redirect
+          redirect to "/home"
       else
           flash[:message] = "Please don't leave blank Portfolio Name - Error Code: #{response.status}"
           redirect to "/portfolio/#{params[:id]}/edit"
