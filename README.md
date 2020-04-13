@@ -163,10 +163,10 @@ class StockController < ApplicationController
     ...
 ```
 
-In line 80 inside StockController, it requires IEX API Key in the following code block.
+In line 80 inside StockController, it requires [NewsAPI key](https://newsapi.org/register) in the following code block.
 
 ```
-url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey=API TOKEN HERE"
+url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey= API TOKEN HERE"
         resp = Net::HTTP.get_response(URI.parse(url))
         @data = JSON.parse(resp.body)
 ```
