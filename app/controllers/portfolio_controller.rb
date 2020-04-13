@@ -39,7 +39,7 @@ class PortfolioController < ApplicationController
       else
           @user = current_user
           @portfolio = Portfolio.create(portfolioname:params[:portfolioname], user_id:@user.id)
-          portfolio_redirect
+          redirect to "/home"
       end
     end
 
@@ -99,7 +99,7 @@ class PortfolioController < ApplicationController
         else
           @portfolio = Portfolio.find_by_id(params[:id])
           if @portfolio.user_id == current_user.id
-             @portfolio.delete
+             @portfolio.destroy
              flash[:portfolio_del_message] = "Portfolio Name Successfully Deleted - Response Code: #{response.status}"
              redirect "/home"
           end
