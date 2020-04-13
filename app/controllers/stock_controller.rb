@@ -2,8 +2,8 @@ require 'pry'
 
 
 class StockController < ApplicationController
-    alpha_token = ""
-    iex_token = ""
+    alpha_token = "Z500O2H4SDCQV62G"
+    iex_token = "Tpk_205eb019e75d4ee887c5fc488056d222"
 
     get '/stocks' do
         if logged_in?
@@ -77,7 +77,7 @@ class StockController < ApplicationController
         end
 
        
-        url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey=""
+        url = "https://newsapi.org/v2/everything?q=#{@company_name}&apiKey=28a8355a5a5a4b25a5cb7983009aa602"
         resp = Net::HTTP.get_response(URI.parse(url))
         @data = JSON.parse(resp.body)
 
