@@ -159,7 +159,7 @@ class UserController < ApplicationController
 		deleteprofile!
   		@users = User.find_by_id(params[:id])
 		  @users.delete
-		  lash[:deluser] = "User Successfully Deleted - Response Code #{response.status}"
+		  flash[:deluser] = "User Successfully Deleted - Response Code #{response.status}"
 				redirect to '/logout'
 	end
 
