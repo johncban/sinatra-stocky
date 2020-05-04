@@ -16,7 +16,7 @@ class UserController < ApplicationController
 			flash[:regnoname] = "Enter Signup Name - Error Code #{response.status}"
             redirect '/'
         elsif params[:email].empty?
-			flash[:regnoemail] = "Enter Proper Signup Email - Error Code #{response.status}"
+			flash[:regnoemail] = "Enter Proper Signup Email - Error Code #{response.status}"			
 			redirect '/'
         elsif params[:password].empty?
 			flash[:regnopass] = "Enter Signup Password - Error Code #{response.status}"
@@ -28,7 +28,7 @@ class UserController < ApplicationController
                 redirect "/"
 			else
 				flash[:user_failed] = "User Failed to Generate - Error Code #{response.status}"
-                redirect "/failure"
+                redirect "/"
             end
         end
 	end
@@ -62,7 +62,7 @@ class UserController < ApplicationController
 				flash[:user_success] = "User Successfully Created - Response Code #{response.status}"
                 redirect "/users"
             else
-                redirect "/failure"
+                redirect "/"
             end
         end
 	end
@@ -102,7 +102,7 @@ class UserController < ApplicationController
 				not_log_redirect
 			end
 		else
-			flash[:nouser] = "No User - Error Code #{response.status}"
+			#flash[:nouser] = "No User - Error Code #{response.status}"
       		redirect '/home'
 		end
 	end

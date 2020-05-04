@@ -17,6 +17,7 @@ gem 'alphavantagerb', '1.3.2'
 gem 'iex-ruby-client'
 gem 'database_cleaner'
 gem 'email_validator'
+gem 'rack-cache'
 
 group :development, :test do
   gem 'tux'

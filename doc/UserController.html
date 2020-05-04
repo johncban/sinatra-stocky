@@ -588,8 +588,8 @@
 			<span class='id identifier rubyid_not_log_redirect'>not_log_redirect</span>
 		<span class='kw'>end</span>
 	<span class='kw'>else</span>
-		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:nouser</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No User - Error Code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-     		<span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/home</span><span class='tstring_end'>&#39;</span></span>
+		<span class='comment'>#flash[:nouser] = &quot;No User - Error Code #{response.status}&quot;
+</span>     		<span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/home</span><span class='tstring_end'>&#39;</span></span>
 	<span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -896,7 +896,7 @@
 		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:regnoname</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Enter Signup Name - Error Code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
            <span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/</span><span class='tstring_end'>&#39;</span></span>
        <span class='kw'>elsif</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:email</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:regnoemail</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Enter Proper Signup Email - Error Code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:regnoemail</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Enter Proper Signup Email - Error Code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>			
 		<span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/</span><span class='tstring_end'>&#39;</span></span>
        <span class='kw'>elsif</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:password</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
 		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:regnopass</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Enter Signup Password - Error Code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -908,7 +908,7 @@
                <span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>
 		<span class='kw'>else</span>
 			<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:user_failed</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User Failed to Generate - Error Code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-               <span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/failure</span><span class='tstring_end'>&quot;</span></span>
+               <span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>
            <span class='kw'>end</span>
        <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -972,7 +972,7 @@
 			<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:user_success</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User Successfully Created - Response Code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
                <span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/users</span><span class='tstring_end'>&quot;</span></span>
            <span class='kw'>else</span>
-               <span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/failure</span><span class='tstring_end'>&quot;</span></span>
+               <span class='id identifier rubyid_redirect'>redirect</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>
            <span class='kw'>end</span>
        <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -986,7 +986,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Apr 13 11:40:02 2020 by
+  Generated on Mon May  4 02:22:32 2020 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.24 (ruby-2.6.3).
 </div>
