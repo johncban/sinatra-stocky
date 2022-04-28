@@ -47,7 +47,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
-    git (1.6.0)
+    git (1.11.0)
       rchardet (~> 1.8)
     hashie (4.1.0)
     httparty (0.15.7)
